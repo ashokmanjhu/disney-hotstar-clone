@@ -1,12 +1,22 @@
 import React from "react";
 import styled from "styled-components";
+import { selectMovies } from "../features/movie/movieSlice";
+import { useSelector } from "react-redux";
 
 const Movies = () => {
+  const movies = useSelector(selectMovies);
+  // console.log(movies);
   return (
     <Container>
       <h4>Recommended For You</h4>
       <Content>
-        <Wrap>
+        {movies &&
+          movies.map((movie) => (
+            <Wrap key={movie.id}>
+              <img src={movie.cardImg} alt="card" />
+            </Wrap>
+          ))}
+        {/* <Wrap>
           <img
             src="https://cdn.vox-cdn.com/thumbor/kLhMHqhPRHYV2SPs-qOgIw_uO6I=/0x0:1920x1080/1200x800/filters:focal(807x387:1113x693)/cdn.vox-cdn.com/uploads/chorus_image/image/63304028/surprise_marvel_releases_a_new_full_trailer_and_poster_for_avengers_endgame_social.0.jpg"
             alt="thumbnail"
@@ -53,7 +63,7 @@ const Movies = () => {
             src="https://cdn.vox-cdn.com/thumbor/kLhMHqhPRHYV2SPs-qOgIw_uO6I=/0x0:1920x1080/1200x800/filters:focal(807x387:1113x693)/cdn.vox-cdn.com/uploads/chorus_image/image/63304028/surprise_marvel_releases_a_new_full_trailer_and_poster_for_avengers_endgame_social.0.jpg"
             alt="thumbnail"
           />
-        </Wrap>
+        </Wrap> */}
       </Content>
     </Container>
   );
