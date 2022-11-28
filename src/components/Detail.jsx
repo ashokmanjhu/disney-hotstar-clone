@@ -1,41 +1,54 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
+import { useParams } from "react-router-dom";
+import db from "../firebase";
 
 const Detail = () => {
+  const { id } = useParams();
+  const [movie, setMovie] = useState();
+
+  useEffect(() => {
+    db.collection("movies")
+      .doc(id)
+      .get()
+      .then((doc) => {
+        if (doc.exists) {
+          setMovie(doc.data());
+        } else {
+        }
+      });
+  }, []);
+  // console.log(movie);
   return (
     <Container>
-      <Background>
-        <img
-          src="https://cdn.vox-cdn.com/thumbor/kLhMHqhPRHYV2SPs-qOgIw_uO6I=/0x0:1920x1080/1200x800/filters:focal(807x387:1113x693)/cdn.vox-cdn.com/uploads/chorus_image/image/63304028/surprise_marvel_releases_a_new_full_trailer_and_poster_for_avengers_endgame_social.0.jpg"
-          alt="background"
-        />
-      </Background>
-      <ImageTitle>
-        <img src="/images/imagetitle.png" alt="not found" />
-      </ImageTitle>
-      <Controls>
-        <PlayButton>
-          <img src="/images/play-icon-black.png" alt="icon" />
-          <span>PLAY</span>
-        </PlayButton>
-        <TrailerButton>
-          <img src="/images/play-icon-white.png" alt="icon" />
-          <span>TRAILER</span>
-        </TrailerButton>
-        <AddButton>
-          <span>+</span>
-        </AddButton>
-        <GroupWatchButton>
-          <img src="/images/group-icon.png" alt="icon" />
-        </GroupWatchButton>
-      </Controls>
-      <SubTitle>2020 • 2h30m • Fantasy ,Adventure ,Sci-Fi ,Action</SubTitle>
-      <Description>
-        After half of all life is snapped away by Thanos, the Avengers are left
-        scattered and divided. Now with a way to reverse the damage, the
-        Avengers and their allies must assemble once more and learn to put
-        differences aside in order to work together and set things right.
-      </Description>
+      {movie && (
+        <>
+          <Background>
+            <img src={movie.backgroundImg} alt="background" />
+          </Background>
+          <ImageTitle>
+            <img src={movie.titleImg} alt="not found" />
+          </ImageTitle>
+          <Controls>
+            <PlayButton>
+              <img src="/images/play-icon-black.png" alt="icon" />
+              <span>PLAY</span>
+            </PlayButton>
+            <TrailerButton>
+              <img src="/images/play-icon-white.png" alt="icon" />
+              <span>TRAILER</span>
+            </TrailerButton>
+            <AddButton>
+              <span>+</span>
+            </AddButton>
+            <GroupWatchButton>
+              <img src="/images/group-icon.png" alt="icon" />
+            </GroupWatchButton>
+          </Controls>
+          <SubTitle>{movie.subTitle}</SubTitle>
+          <Description>{movie.description}</Description>
+        </>
+      )}
     </Container>
   );
 };
