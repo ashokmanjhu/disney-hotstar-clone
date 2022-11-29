@@ -19,7 +19,7 @@ const Header = () => {
     auth.onAuthStateChanged(async (user) => {
       if (user) {
         setUser(user);
-        history("/");
+        history("/home");
       }
     });
   }, [userName]);
@@ -39,7 +39,7 @@ const Header = () => {
         .signOut()
         .then(() => {
           dispatch(setSignOutState());
-          history("/login");
+          history("/");
         })
         .catch((err) => alert(err.message));
     }
@@ -65,27 +65,27 @@ const Header = () => {
       ) : (
         <>
           <NavMenu>
-            <a>
+            <a href="/#">
               <img src="/images/home-icon.svg" alt="home" />
               <span>HOME</span>
             </a>
-            <a>
+            <a href="/#">
               <img src="/images/search-icon.svg" alt="home" />
               <span>SEARCH</span>
             </a>
-            <a>
+            <a href="/#">
               <img src="/images/watchlist-icon.svg" alt="home" />
               <span>WATCHLIST</span>
             </a>
-            <a>
+            <a href="/#">
               <img src="/images/original-icon.svg" alt="home" />
               <span>ORIGINALS</span>
             </a>
-            <a>
+            <a href="/#">
               <img src="/images/movie-icon.svg" alt="home" />
               <span>MOVIES</span>
             </a>
-            <a>
+            <a href="/#">
               <img src="/images/series-icon.svg" alt="home" />
               <span>SERIES</span>
             </a>
@@ -123,7 +123,9 @@ const NavMenu = styled.div`
   flex: 1;
   margin-left: 25px;
   a {
+    color: white;
     display: flex;
+    text-decoration: none;
     align-items: center;
     padding: 0 12px;
     cursor: pointer;
@@ -187,6 +189,7 @@ const LoginContainer = styled.div`
 `;
 
 const Login = styled.a`
+  cursor: pointer;
   background-color: rgba(0, 0, 0, 0.6);
   padding: 8px 16px;
   text-transform: uppercase;
