@@ -17,7 +17,7 @@ const Detail = () => {
         } else {
         }
       });
-  }, []);
+  });
   // console.log(movie);
   return (
     <Container>
