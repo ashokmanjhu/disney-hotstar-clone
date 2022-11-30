@@ -17,7 +17,7 @@ const Home = () => {
       });
       dispatch(setMovies(tempMovies));
     });
-  });
+  },[]);
 
   return (
     <Container>
