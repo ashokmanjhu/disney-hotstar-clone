@@ -17,7 +17,7 @@ const Detail = () => {
         } else {
         }
       });
-  },[]);
+  },[]); // eslint-disable-line react-hooks/exhaustive-deps
   // console.log(movie);
   return (
     <Container>
