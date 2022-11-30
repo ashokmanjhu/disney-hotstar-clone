@@ -17,7 +17,8 @@ const Home = () => {
       });
       dispatch(setMovies(tempMovies));
     });
-  },[]);
+  },[]);// eslint-disable-line react-hooks/exhaustive-deps
+
 
   return (
     <Container>
