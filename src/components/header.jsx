@@ -22,7 +22,7 @@ const Header = () => {
         history("/home");
       }
     });
-  },[userName]);
+  },[]);// eslint-disable-line react-hooks/exhaustive-deps
 
   const handleAuth = () => {
     if (!userName) {
